@@ -1,7 +1,4 @@
-import pyinotify
-import os
-import datetime
-import subprocess
+import pyinotify, os, datetime, subprocess
 
 wm = pyinotify.WatchManager()
 mask = pyinotify.IN_CREATE | pyinotify.IN_DELETE
