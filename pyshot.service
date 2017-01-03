@@ -1,0 +1,6 @@
+[Unit]
+Description=Watch for screenshot and upload
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /path/to/monitor.py
