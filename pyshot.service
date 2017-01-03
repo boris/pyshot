@@ -3,4 +3,5 @@ Description=Watch for screenshot and upload
 
 [Service]
 Type=idle
+User=<your user>
 ExecStart=/usr/bin/python /path/to/monitor.py
