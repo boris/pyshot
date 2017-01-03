@@ -6,10 +6,15 @@ project that I already did in Ruby: A script to upload screenshots from
 **Setup**
 ```
 sudo pip install pyinotify
+# edit pyshot.service, change path
+sudo cp pyshot.service /lib/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable pyshot.service
+sudo systemctl start pyshot.service
 ```
 
 **To Do**
-- Daemonize
+- Daemonize (currently using systemd)
 - Copy link to clipboard (xsel ?)
 - Show notification on Ubuntu notification
 - Make it a module?
