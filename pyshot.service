@@ -4,4 +4,6 @@ Description=Watch for screenshot and upload
 [Service]
 Type=idle
 User=<your user>
-ExecStart=/usr/bin/python /path/to/monitor.py
+ExecStart=/usr/bin/python monitor.py
+WorkingDirectory=/path/to/git-clone
+Restart=always
