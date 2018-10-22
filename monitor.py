@@ -14,10 +14,6 @@ class EventHandler(pyinotify.ProcessEvent):
         os.rename(event.pathname, new_name)
         subprocess.call(['scp', new_name, 'moby:apps/screenshots/imgs'])
 
-        # Needs to be fixed!
-        #url = "http://irc.zsh.io:8080/ss/" + new + ".png"
-        #clipboard.copy(url)
-
         os.remove(new_name)
 
 handler = EventHandler()
