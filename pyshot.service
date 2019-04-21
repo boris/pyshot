@@ -1,9 +1,13 @@
 [Unit]
-Description=Watch for screenshot and upload
+Description=Pyshot
+Conflicts=getty@tty1.service
 
 [Service]
-Type=idle
-User=<your user>
-ExecStart=/usr/bin/python monitor.py
-WorkingDirectory=/path/to/git-clone
+Type=simple
+User=<user>
+ExecStart=python monitor.py
+WorkingDirectory=<path to clone>
 Restart=always
+
+[Install]
+WantedBy=multi-user.target
