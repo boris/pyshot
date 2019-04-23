@@ -16,6 +16,8 @@ class EventHandler(pyinotify.ProcessEvent):
         #url = "http://irc.zsh.io:8080/ss/" + new + ".png"
         #clipboard.copy(url)
         subprocess.call(['scp', new_name, 'moby:apps/screenshots/imgs'])
+        notify = "notify-send 'https://imgs.zsh.io/{}.png'".format(new)
+        os.system(notify)
         os.remove(new_name)
 
 handler = EventHandler()
