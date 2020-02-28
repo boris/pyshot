@@ -19,7 +19,10 @@ class EventHandler(pyinotify.ProcessEvent):
         # S3 upload
         session = boto3.Session(profile_name='boris')
         s3_client = session.client('s3')
-        s3_client.upload_file(new_name, 'imgs.zsh.io', new_name[17:])
+        s3_client.upload_file(new_name, 
+                'imgs.zsh.io', 
+                new_name[17:],
+                ExtraArgs={'ContentType': 'image/png'})
         os.remove(new_name)
 
 handler = EventHandler()
