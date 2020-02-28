@@ -1,5 +1,8 @@
-import pyinotify, os, datetime, subprocess
-import clipboard
+import pyinotify
+import os
+import datetime
+import subprocess
+import boto3
 
 wm = pyinotify.WatchManager()
 mask = pyinotify.IN_CREATE | pyinotify.IN_DELETE
@@ -12,12 +15,11 @@ class EventHandler(pyinotify.ProcessEvent):
         new = datetime.datetime.now().strftime("%s")
         new_name = event.path + "/" + new + ".png"
         os.rename(event.pathname, new_name)
-        # Needs to be fixed!
-        #url = "http://irc.zsh.io:8080/ss/" + new + ".png"
-        #clipboard.copy(url)
-        subprocess.call(['scp', new_name, 'moby:apps/screenshots/imgs'])
-        notify = "notify-send 'https://imgs.zsh.io/{}.png'".format(new)
-        os.system(notify)
+
+        # S3 upload
+        session = boto3.Session(profile_name='boris')
+        s3_client = session.client('s3')
+        s3_client.upload_file(new_name, 'imgs.zsh.io', new_name[17:])
         os.remove(new_name)
 
 handler = EventHandler()
