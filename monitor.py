@@ -17,7 +17,7 @@ class EventHandler(pyinotify.ProcessEvent):
         os.rename(event.pathname, new_name)
 
         # S3 upload
-        session = boto3.Session(profile_name='boris')
+        session = boto3.Session(profile_name='pyshot')
         s3_client = session.client('s3')
         s3_client.upload_file(new_name, 
                 'imgs.zsh.io', 
