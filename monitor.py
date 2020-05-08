@@ -1,5 +1,8 @@
-import pyinotify, os, datetime, subprocess
-import clipboard
+import pyinotify
+import os
+import datetime
+import subprocess
+import boto3
 
 wm = pyinotify.WatchManager()
 mask = pyinotify.IN_CREATE | pyinotify.IN_DELETE
