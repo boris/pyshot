@@ -15,13 +15,7 @@ class EventHandler(pyinotify.ProcessEvent):
         new = datetime.datetime.now().strftime("%s")
         new_name = event.path + "/" + new + ".png"
         os.rename(event.pathname, new_name)
-        # Needs to be fixed!
-        #url = "http://irc.zsh.io:8080/ss/" + new + ".png"
-        #clipboard.copy(url)
-        #subprocess.call(['scp','-i ~/.ssh/keys/id_rsa_pyshot', new_name, '192.168.1.12:~/docker/shots/images', 'shell=True'])
-        subprocess.call('scp -i ~/.ssh/keys/id_rsa_pyshot {} 192.168.1.12:~/docker/shots/images'.format(new_name), shell=True)
-        notify = "notify-send 'https://imgs.zsh.io/{}.png'".format(new)
-        os.system(notify)
+        subprocess.call('scp -i ~/.ssh/keys/id_rsa_pyshot {} jumphost-aws:~/shots'.format(new_name), shell=True)
         os.remove(new_name)
 
 handler = EventHandler()
